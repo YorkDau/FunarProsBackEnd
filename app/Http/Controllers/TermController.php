@@ -12,26 +12,27 @@ class TermController extends Controller
 {
     public function departamentos()
     {
-         $departamentos = Term::where('name','Colombia')->first();
+         $pais = Term::where('name','Colombia')->first();
+         $departamentos = Term::where('term_id', $pais->id)->get();
          if($departamentos === null){
             return Utils::responseJson(Response::HTTP_NOT_FOUND,'No se encuentran departamentos registrados', null,  Response::HTTP_OK);
         }
         return Utils::responseJson(
             Response::HTTP_OK,
             $departamentos->count() === 0 ? 'No hay departamentos registrados' : 'Datos encontrados satisfactoriamente',
-            $departamentos->childrens()->pluck('name','id'),
+            $departamentos,
             Response::HTTP_OK
         );
     }
     public function municipios($id){
-        $municipios = Term::find($id);
+        $municipios = Term::where('term_id',$id)->get();
          if($municipios === null){
             return Utils::responseJson(Response::HTTP_NOT_FOUND,'No se encuentran municipios registrados', null,  Response::HTTP_OK);
         }
         return Utils::responseJson(
             Response::HTTP_OK,
-            $municipios->childrens()->count() === 0 ? 'No hay municipios  registrados' : 'Datos encontrados satisfactoriamente',
-            $municipios->childrens()->pluck('name','id'),
+            $municipios->count() === 0 ? 'No hay municipios  registrados' : 'Datos encontrados satisfactoriamente',
+            $municipios,
             Response::HTTP_OK
         );
     }

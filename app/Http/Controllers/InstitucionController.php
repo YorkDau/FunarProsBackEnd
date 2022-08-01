@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Date;
 
 class InstitucionController extends Controller
 {
@@ -21,7 +22,8 @@ class InstitucionController extends Controller
      */
     public function index()
     {
-        $instituciones = InstitucionResource::collection(Institucion::all());
+        //$instituciones = InstitucionResource::collection(Institucion::paginate(2));
+        $instituciones = Institucion::paginate(6);
         return Utils::responseJson(
             Response::HTTP_OK,
             $instituciones->count() === 0 ? 'No hay instituciones registradas' : 'Datos encontrados satisfactoriamente',
@@ -65,6 +67,7 @@ class InstitucionController extends Controller
                 if ($key !== 'email')
                     $institucion->$key = strtoupper($value);
             }
+            $institucion->inicio_convenio= date('Y-m-d',strtotime($institucion->inicio_convenio));
             $institucion->save();
             return Utils::responseJson(Response::HTTP_CREATED, 'Institución guardada correctamente',
              $institucion->toArray(), Response::HTTP_CREATED);
