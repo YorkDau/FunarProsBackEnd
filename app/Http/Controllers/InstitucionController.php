@@ -23,7 +23,7 @@ class InstitucionController extends Controller
     public function index()
     {
         //$instituciones = InstitucionResource::collection(Institucion::paginate(2));
-        $instituciones = Institucion::paginate(6);
+        $instituciones = Institucion::with('term.parent')->paginate(6);
         return Utils::responseJson(
             Response::HTTP_OK,
             $instituciones->count() === 0 ? 'No hay instituciones registradas' : 'Datos encontrados satisfactoriamente',
@@ -116,8 +116,8 @@ class InstitucionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $institucion = Institucion::find($id);
 
+        $institucion = Institucion::find($id);
         if($institucion === null){
             return Utils::responseJson(Response::HTTP_NOT_FOUND,'No existe un registro con este ID', null,  Response::HTTP_OK);
         }
@@ -150,7 +150,10 @@ class InstitucionController extends Controller
                 }
             }
         }
+
         $institucion->save();
+        return Utils::responseJson(Response::HTTP_OK,'Institución actualizada correctamente', $institucion,Response::HTTP_OK );
+
     }
     /**
      * Remove the specified resource from storage.

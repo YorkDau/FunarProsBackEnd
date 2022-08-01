@@ -13,8 +13,9 @@ class Term extends Model
     protected $fillable = [
         'id','name','key','initials','code','term_id','is_active','deleted_at','created_at','updated_at'
     ];
+
     public function parent(){
-        return $this->belongsTo(Term::class);
+        return $this->belongsTo(Term::class, 'term_id');
     }
     public function childrens(){
         return $this->hasMany(Term::class);
