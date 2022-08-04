@@ -14,12 +14,20 @@ class Institucion extends Model
     use softDeletes;
 
     protected $fillable = [
-        'id','identificacion','telefono','inicio_convenio','nombre','tipo','email','term_id','deleted_at','created_at','updated_at'
+        'id',
+        'identificacion',
+        'telefono',
+        'inicio_convenio',
+        'nombre',
+        'tipo',
+        'email',
+        'term_id',
+        'deleted_at',
+        'created_at',
+        'updated_at'
     ];
-    public function term(){
-       return $this-> belongsTo(Term::class);
+    public function term()
+    {
+        return $this->belongsTo(Term::class);
     }
 }
-
-
-

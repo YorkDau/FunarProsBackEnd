@@ -39,8 +39,9 @@ class StoreInstitucionRequest extends FormRequest
      */
     public static function menssages(){
         return [
-            'identificacion.required' => 'La indentificación es requeridad',
-            'identificacion.unique' => 'La indentificación ingresada ya existe'
+            'identificacion.required' => 'La indentificación es requerida',
+            'identificacion.unique' => 'La indentificación ingresada ya existe',
+
         ];
     }
 }

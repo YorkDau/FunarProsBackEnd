@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\TermController;
 use Illuminate\Http\Request;
@@ -29,6 +30,14 @@ Route::get('/institucion/show/{id}',[InstitucionController::class,'show']);
 Route::put('/institucion/update/{id}',[InstitucionController::class,'update']);
 Route::delete('/institucion/delete/{id}',[InstitucionController::class,'destroy']);
 
-// Routes-Terms
+// Routes - Terms
 Route::get('/term/departamentos',[TermController::class,'departamentos']);
 Route::get('/term/municipios/{id}',[TermController::class,'municipios']);
+
+//Routes - Empleados
+Route::get('/empleados',[EmpleadoController::class,'index']);
+Route::post('/empleados',[EmpleadoController::class,'store']);
+Route::get('/empleados/show/{id}',[EmpleadoController::class,'show']);
+Route::put('/empleados/update/{id}',[EmpleadoController::class,'update']);
+Route::delete('/empleados/delete/{id}',[EmpleadoController::class,'destroy']);
+

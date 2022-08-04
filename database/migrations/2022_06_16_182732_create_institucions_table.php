@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('inicio_convenio')->comment('Fecha de incio del convenio');
             $table->string('nombre', 100)->comment('Nombre de la institución');
             $table->foreignId('term_id')->comment('Llave foranea (relacion) de la tabla terms.');
-
             $table->foreign('term_id')->references('id')->on('terms');
             $table->enum('tipo', ['PRIVADO', 'PUBLICO'])->comment('Sector al que pertenece la institución (PUBLICO-PRIVADO)');
             $table->string('email', 100)->nullable()->comment('Correo electronico de la institución');
