@@ -24,34 +24,35 @@ class StoreEmpleadoRequest extends FormRequest
     public  static function rules()
     {
         return [
-            'tipo_identificacion_id'=>'required',
-            'identificacion'=> 'required|unique:empleados',
-            'fecha_expedicion_documento' =>'required',
-            'nombres' =>'required',
-            'apellidos'=> 'required',
-            'numero_telefono'=> 'required',
-            'genero_id' =>'required',
-            'email'=> 'required|max:100|email',
-            'fecha_nacimiento'=> 'required|date',
-            'ocupacion'=>'required',
-            'nivel_escolaridad_id'=> 'required',
-            'direccion'=> 'max:100',
-            'soporte_documento'=> 'required'
+            'tipo_identificacion_id' => 'required',
+            'identificacion' => 'required|unique:empleados',
+            'fecha_expedicion_documento' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'numero_telefono' => 'required',
+            'genero_id' => 'required',
+            'email' => 'required|max:100|email',
+            'fecha_nacimiento' => 'required|date',
+            'ocupacion' => 'required',
+            'nivel_escolaridad_id' => 'required',
+            'direccion' => 'max:100',
+            'soporte_documento' => 'required'
 
         ];
     }
-        public static function menssages(){
+    public static function menssages()
+    {
         return [
             'tipo_identificacion_id.required' => 'La indentificación es requerida',
             'identificacion.unique' => 'La indentificación ingresada ya existe',
-            'fecha_expedicion_documento.required' =>'La fecha de expedición del documento es requerida',
-            'nombres.required'=>'El nombre del empleado es requerido',
-            'apellidos.required'=> 'El apellido del empleado es requerido',
-            'email.required' =>'El correo electronico del empleado es requerido',
-            'fecha_nacimiento.required' => 'La fecha del empleado es requerida',
-            'ocupacion.required'=>'La ocupación del empleado es requerida',
-            'nivel_escolaridad_id.required'=> 'La escolaridad del empleado es requerida',
-            'soporte_documento.required'=>'El documento del empleado es requerido'
+            'fecha_expedicion_documento.required' => 'La fecha de expedición del documento es requerida',
+            'nombres.required' => 'El nombre del empleado es requerido',
+            'apellidos.required' => 'El apellido del empleado es requerido',
+            'email.required' => 'El correo electronico del empleado es requerido',
+            'fecha_nacimiento.required' => 'La fecha de nacimiento del empleado es requerida',
+            'ocupacion.required' => 'La ocupación del empleado es requerida',
+            'nivel_escolaridad_id.required' => 'La escolaridad del empleado es requerida',
+            'soporte_documento.required' => 'El documento del empleado es requerido'
 
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\TermController;
 use Illuminate\Http\Request;
@@ -24,20 +25,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::resource('institucion',InstitucionController::class);
 
 //Routes - Institucion
-Route::get('/institucion',[InstitucionController::class,'index']);
-Route::post('/institucion',[InstitucionController::class,'store']);
-Route::get('/institucion/show/{id}',[InstitucionController::class,'show']);
-Route::put('/institucion/update/{id}',[InstitucionController::class,'update']);
-Route::delete('/institucion/delete/{id}',[InstitucionController::class,'destroy']);
+Route::get('/institucion', [InstitucionController::class, 'index']);
+Route::post('/institucion', [InstitucionController::class, 'store']);
+Route::get('/institucion/show/{id}', [InstitucionController::class, 'show']);
+Route::put('/institucion/update/{id}', [InstitucionController::class, 'update']);
+Route::delete('/institucion/delete/{id}', [InstitucionController::class, 'destroy']);
 
 // Routes - Terms
-Route::get('/term/departamentos',[TermController::class,'departamentos']);
-Route::get('/term/municipios/{id}',[TermController::class,'municipios']);
+Route::get('/term/departamentos', [TermController::class, 'departamentos']);
+Route::get('/term/municipios/{id}', [TermController::class, 'municipios']);
 
 //Routes - Empleados
-Route::get('/empleados',[EmpleadoController::class,'index']);
-Route::post('/empleados',[EmpleadoController::class,'store']);
-Route::get('/empleados/show/{id}',[EmpleadoController::class,'show']);
-Route::put('/empleados/update/{id}',[EmpleadoController::class,'update']);
-Route::delete('/empleados/delete/{id}',[EmpleadoController::class,'destroy']);
+Route::get('/empleados', [EmpleadoController::class, 'index']);
+Route::post('/empleados', [EmpleadoController::class, 'store']);
+Route::get('/empleados/show/{id}', [EmpleadoController::class, 'show']);
+Route::put('/empleados/update/{id}', [EmpleadoController::class, 'update']);
+Route::delete('/empleados/delete/{id}', [EmpleadoController::class, 'destroy']);
 
+//Routes - Empresas
+Route::get('/empresas', [EmpresaController::class, 'index']);
+Route::post('/empresas', [EmpresaController::class, 'store']);
+Route::get('/empresas/show/{id}', [EmpresaController::class, 'show']);
+Route::put('/empresas/update/{id}', [EmpresaController::class, 'update']);
+Route::delete('/empresas/delete/{id}', [EmpresaController::class, 'destroy']);
