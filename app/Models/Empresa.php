@@ -25,6 +25,14 @@ class Empresa extends Model
         'updated_at'
     ];
     public function documentos(){
-        return $this->belongsToMany(Term::class,'documento_id')->withPivot('soporte_documento');
+        return $this->belongsToMany(Term::class,'empresas_documentos','empresa_id', 'documento_id')->withPivot('soporte_documento');
+    }
+
+    public function tipos(){
+         return $this->belongsTo(Term::class, 'tipo_id', 'id');
+    }
+        public function term()
+    {
+        return $this->belongsTo(Term::class);
     }
 }

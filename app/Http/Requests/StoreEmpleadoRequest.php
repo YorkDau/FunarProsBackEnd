@@ -13,7 +13,7 @@ class StoreEmpleadoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class StoreEmpleadoRequest extends FormRequest
         return [
             'tipo_identificacion_id' => 'required',
             'identificacion' => 'required|unique:empleados',
-            'fecha_expedicion_documento' => 'required',
+            'fecha_expedicion_documento' => 'required|date',
             'nombres' => 'required',
             'apellidos' => 'required',
             'numero_telefono' => 'required',

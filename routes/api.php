@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InstitucionController;
+use App\Http\Controllers\PropuestaController;
 use App\Http\Controllers\TermController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,10 @@ Route::delete('/institucion/delete/{id}', [InstitucionController::class, 'destro
 // Routes - Terms
 Route::get('/term/departamentos', [TermController::class, 'departamentos']);
 Route::get('/term/municipios/{id}', [TermController::class, 'municipios']);
+Route::get('/term/documentos', [TermController::class, 'tipoDocumentos']);
+Route::get('/term/niveles-estudios', [TermController::class, 'nivelEstudio']);
+Route::get('/term/generos', [TermController::class, 'genero']);
+Route::get('/term/tipos',[TermController::class,'tipoEmpresa']);
 
 //Routes - Empleados
 Route::get('/empleados', [EmpleadoController::class, 'index']);
@@ -48,3 +53,11 @@ Route::post('/empresas', [EmpresaController::class, 'store']);
 Route::get('/empresas/show/{id}', [EmpresaController::class, 'show']);
 Route::put('/empresas/update/{id}', [EmpresaController::class, 'update']);
 Route::delete('/empresas/delete/{id}', [EmpresaController::class, 'destroy']);
+
+//Routes - Propuestas
+
+Route::get('/propuestas', [PropuestaController::class, 'index']);
+Route::post('propuestas', [PropuestaController::class, 'store']);
+Route::get('/propuestas/show/{id}', [PropuestaController::class, 'show']);
+Route::put('/propuestas/update/{id}', [PropuestaController::class, 'update']);
+Route::delete('/propuestas/delete/{id}', [PropuestaController::class, 'destroy']);

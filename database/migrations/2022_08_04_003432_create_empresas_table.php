@@ -24,8 +24,7 @@ return new class extends Migration
             $table->date('fecha_convenio')->comment('Fecha de inicio de convenio de la empresa.');
             $table->foreignId('municipio_id')->comment('Llave foranea (relación) de la tabla terms.');
             $table->foreign('municipio_id')->references('id')->on('terms');
-
-
+            $table->softDeletes();
             $table->timestamps();
         });
         Schema::create('empresas_documentos', function (Blueprint $table) {

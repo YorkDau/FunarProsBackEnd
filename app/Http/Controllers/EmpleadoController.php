@@ -7,7 +7,6 @@ use App\Http\Requests\StoreEmpleadoRequest;
 use App\Http\Requests\UpdateEmpleadoRequest;
 use App\Http\Utils;
 use Exception;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +21,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleados = Empleado::with('term.parent')->paginate(6);
+        $empleados = Empleado::with('genero', 'documento', 'escolaridad')->paginate(6);
 
         return Utils::responseJson(
             Response::HTTP_OK,
@@ -51,6 +50,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
+
         $validate = Validator::make($request->all(), StoreEmpleadoRequest::rules(), StoreEmpleadoRequest::menssages());
         if ($validate->fails()) {
             return Utils::responseJson(
@@ -128,6 +128,7 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $empleado = Empleado::find($id);
         if ($empleado === null) {
             return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No existe un registro con este ID', null,  Response::HTTP_OK);
@@ -143,10 +144,12 @@ class EmpleadoController extends Controller
             );
         }
 
+        $empleado->fill($request->all());
+
         foreach ($empleado->attributesToArray() as $key => $value) {
-            if (isset($request->key)) {
+            if (isset($request->$key)) {
                 if ($key !== 'email' && $key !== 'soporte_documento') {
-                    $empleado->key = strtoupper($value);
+                    $empleado[$key] = strtoupper($request->$key);
                 }
             }
         }
@@ -159,6 +162,7 @@ class EmpleadoController extends Controller
                 $empleado->soporte_documento = $path;
             }
         }
+
         $empleado->save();
         return Utils::responseJson(
             Response::HTTP_OK,

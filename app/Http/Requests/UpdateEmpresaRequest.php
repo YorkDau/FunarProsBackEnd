@@ -13,7 +13,7 @@ class UpdateEmpresaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,11 +21,11 @@ class UpdateEmpresaRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules($id)
+    public static function rules($id)
     {
         return [
             'nit' => 'required|unique:empresas,nit,' . $id,
-            'nombres' => 'required',
+            'nombre' => 'required',
             'tipo_id' => 'required',
             'email' => 'max:100|email',
             'telefono' => 'required',

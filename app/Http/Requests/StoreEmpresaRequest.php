@@ -13,7 +13,7 @@ class StoreEmpresaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,11 +21,11 @@ class StoreEmpresaRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public static function rules()
     {
         return [
             'nit' => 'required|unique:empresas',
-            'nombres' => 'required',
+            'nombre' => 'required',
             'tipo_id' => 'required',
             'email' => 'max:100|email',
             'telefono' => 'required',

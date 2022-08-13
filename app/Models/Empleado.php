@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class Empleado extends Model
 {
@@ -30,8 +31,16 @@ class Empleado extends Model
         'updated_at'
     ];
 
-    public function term()
+    public function genero()
     {
-        return $this->belongsTo(Term::class);
+        return $this->belongsTo(Term::class, 'genero_id', 'id');
+    }
+        public function documento()
+    {
+        return $this->belongsTo(Term::class, 'tipo_identificacion_id', 'id');
+    }
+        public function escolaridad()
+    {
+        return $this->belongsTo(Term::class, 'nivel_escolaridad_id', 'id');
     }
 }

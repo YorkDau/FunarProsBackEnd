@@ -148,6 +148,7 @@ class InstitucionController extends Controller
             );
         }
         foreach ($institucion->attributesToArray() as $key => $value) {
+
             if (isset($request->$key)) {
                 if ($key == 'email') {
                     $institucion->$key = $request->$key;
@@ -156,7 +157,6 @@ class InstitucionController extends Controller
                 }
             }
         }
-
         $institucion->save();
         return Utils::responseJson(Response::HTTP_OK, 'Institución actualizada correctamente', $institucion, Response::HTTP_OK);
     }
