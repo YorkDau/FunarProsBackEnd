@@ -67,15 +67,18 @@ class EmpresaController extends Controller
                 }
             }
             $empresa->fecha_convenio = date('Y-m-d', strtotime($empresa->fecha_convenio));
+
             $empresa->save();
             $documentos = [];
-            foreach ($request->soportes as $key => $value) {
-                if ($request->file("soportes.$key")->isValid()) {
-                    $path = $request->file("soportes.$key")->store('empresas/documentos');
-                    $documentos[$key] = ['soporte_documento' => $path];
+
+            if ($request->file('soportes.file') && $request->file("soportes.document")->isValid()) {
+                foreach ($request->soportes as $key) {
+                    $path = $request->file("soportes.file")->store('empresas/documentos');
+                    $documentos[$key['document']['value']] = ['soporte_documento' => $path];
                 }
             }
-            $empresa->documentos()->sync($documentos);
+            $empresa->documentos()->syncWithPivotValues(array_keys($documentos), array_values($documentos));
+
             Db::commit();
             return Utils::responseJson(
                 Response::HTTP_OK,

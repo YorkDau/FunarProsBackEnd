@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tipo_identificacion_id')->comment('Llave foranea (relacion) de la tabla terms.');
             $table->foreign('tipo_identificacion_id')->references('id')->on('terms');
-
-            $table->string('')->comment('Numero de identificacion del empleado');
+            $table->string('identificacion')->comment('Numero de identificacion del empleado');
             $table->date('fecha_expedicion_documento')->comment('Fecha de expedicion del documento del empleado');
             $table->string('nombres')->comment('Primer y segundo nombre del empleado');
             $table->string('apellidos')->comment('Apellidos del empleado');

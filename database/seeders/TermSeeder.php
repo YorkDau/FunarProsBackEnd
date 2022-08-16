@@ -1596,6 +1596,30 @@ class TermSeeder extends Seeder
 
                 ],
             ],
+            [
+                "name" => "Documentos empresa",
+                "initials" => "DEM",
+                "children" => [
+                    [
+                        "name" => "C.C Representante legal",
+                        "initials" => "C.C.R.L"
+                    ],
+                    [
+                        "name" => "Registro unico tributario",
+                        "initials" => "RUT",
+                    ],
+                    [
+                        "name" => "Certificado de existencia legal",
+                        "initials" => "CEL",
+                    ],
+
+                    [
+                        "name" => "Camara de comercio",
+                        "initials" => "CAC",
+                    ],
+
+                ],
+            ],
         );
 
         foreach ($terms as $value) {

@@ -10,7 +10,7 @@ class Propuesta extends Model
 {
     use HasFactory;
     use SoftDeletes;
-        protected $fillable = [
+    protected $fillable = [
         'id',
         'institucion_id',
         'tipo',
@@ -21,5 +21,12 @@ class Propuesta extends Model
         'created_at',
         'updated_at'
     ];
-
+    public function empresas()
+    {
+        return $this->belongsToMany(Empresa::class, 'propuestas_empresas', 'propuesta_id', 'empresa_id');
+    }
+    public function instituciones()
+    {
+        return $this->belongsToMany(Institucion::class, 'propuestas_instituciones', 'propuesta_id', 'institucion_id');
+    }
 }

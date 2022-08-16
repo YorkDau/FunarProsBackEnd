@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('etnia')->comment('Tipo de etnia del estudiante');
             $table->string('grado')->comment('Grado del estudiante');
             $table->string('tipo_complementario')->comment('tipo de complemento alimentario');
+            $table->foreignId('institucion_id')->comment('Llave foranea (relación) de la tabla institucions.');
+            $table->foreign('institucion_id')->references('id')->on('institucions');
             $table->softDeletes();
             $table->timestamps();
         });

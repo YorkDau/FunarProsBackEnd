@@ -24,15 +24,21 @@ class Empresa extends Model
         'created_at',
         'updated_at'
     ];
-    public function documentos(){
-        return $this->belongsToMany(Term::class,'empresas_documentos','empresa_id', 'documento_id')->withPivot('soporte_documento');
+    public function documentos()
+    {
+        return $this->belongsToMany(Term::class, 'empresas_documentos', 'empresa_id', 'documento_id')->withPivot('soporte_documento');
     }
 
-    public function tipos(){
-         return $this->belongsTo(Term::class, 'tipo_id', 'id');
+    public function tipos()
+    {
+        return $this->belongsTo(Term::class, 'tipo_id', 'id');
     }
         public function term()
     {
-        return $this->belongsTo(Term::class, 'municipio_id', 'id');
+        return $this->belongsTo(Term::class, 'municipio_id', 'id', 'municipio_id', 'id');
+    }
+    public function propuestas()
+    {
+        return $this->belongsToMany(Propuesta::class, 'propuestas_empresas', 'empresa_id', 'propuesta_id');
     }
 }

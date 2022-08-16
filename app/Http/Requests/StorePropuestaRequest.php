@@ -27,6 +27,7 @@ class StorePropuestaRequest extends FormRequest
             'numero_propuesta' => 'required|unique:propuestas',
             'institucion_id' => 'required',
             'tipo' => 'required',
+            'estado' => 'required',
             'empresa_id' => 'required',
             'fecha_inicial' => 'required|date'
         ];
@@ -35,7 +36,7 @@ class StorePropuestaRequest extends FormRequest
     {
         return [
             'numero_propuesta.required' => 'El numero de la propuesta  es requerida',
-            'numero_propuesta.unique' => 'El número de la propuesta ingresada ya existe',
+            'numero_propuesta.required' => 'El número de la propuesta es requerida',
             'institucion_id.required' => 'la Institucion es requerida',
             'tipo_id.required' => 'El tipo de la propuesta  es requerido',
             'empresa_id.required' => 'la  de empresa es requerida',

@@ -70,7 +70,7 @@ class InstitucionController extends Controller
             $institucion->inicio_convenio = date('Y-m-d', strtotime($institucion->inicio_convenio));
             $institucion->save();
             return Utils::responseJson(
-                Response::HTTP_CREATED,
+                Response::HTTP_OK,
                 'Institución guardada correctamente',
                 $institucion->toArray(),
                 Response::HTTP_CREATED

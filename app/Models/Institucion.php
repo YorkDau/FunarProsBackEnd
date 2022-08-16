@@ -30,4 +30,12 @@ class Institucion extends Model
     {
         return $this->belongsTo(Term::class);
     }
+    public function estudiantes()
+    {
+        return $this->hasMany(Estudiante::class);
+    }
+    public function propuestas()
+    {
+        return $this->belongsToMany(Propuesta::class, 'propuestas_instituciones', 'institucion_id', 'propuesta_id');
+    }
 }
