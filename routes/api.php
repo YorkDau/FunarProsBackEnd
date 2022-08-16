@@ -39,6 +39,8 @@ Route::get('/term/documentos', [TermController::class, 'tipoDocumentos']);
 Route::get('/term/niveles-estudios', [TermController::class, 'nivelEstudio']);
 Route::get('/term/generos', [TermController::class, 'genero']);
 Route::get('/term/tipos',[TermController::class,'tipoEmpresa']);
+Route::get('/term/tipos-documentos-empresas',[TermController::class,'documentoEmpresa']);
+
 
 //Routes - Empleados
 Route::get('/empleados', [EmpleadoController::class, 'index']);

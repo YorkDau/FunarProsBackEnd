@@ -105,6 +105,20 @@ class TermController extends Controller
             Response::HTTP_OK
         );
     }
+            public  function documentoEmpresa()
+    {
+        $doucmentos = Term::where('name', 'Documentos empresa')->first();
+        $tiposdocumentos = Term::where('term_id', $doucmentos->id)->get();
+        if ($tiposdocumentos === null) {
+            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran  tipos de empresas registrados', null,  Response::HTTP_OK);
+        }
+        return Utils::responseJson(
+            Response::HTTP_OK,
+            $tiposdocumentos->count() === 0 ? 'No hay tipos de empresas registradas' : 'Datos encontrados satisfactoriamente',
+            $tiposdocumentos,
+            Response::HTTP_OK
+        );
+    }
     /**
      * Display a listing of the resource.
      *

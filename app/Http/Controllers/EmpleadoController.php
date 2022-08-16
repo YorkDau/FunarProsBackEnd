@@ -21,7 +21,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleados = Empleado::with('genero', 'documento', 'escolaridad')->paginate(6);
+        $empleados = Empleado::with('genero', 'documento', 'escolaridad')->paginate(7);
 
         return Utils::responseJson(
             Response::HTTP_OK,
@@ -99,11 +99,11 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        $empleados = Empleado::find($id);
+        $empleado = Empleado::with('genero', 'documento', 'escolaridad')->find($id);
         return Utils::responseJson(
             Response::HTTP_OK,
-            $empleados === null ? 'No hay empleados registrados' : 'Datos encontrados satisfactoriamente',
-            $empleados !== null ? $empleados->toArray() : $empleados,
+            $empleado === null ? 'No hay empleados registrados' : 'Datos encontrados satisfactoriamente',
+            $empleado !== null ? $empleado->toArray() : $empleado,
             Response::HTTP_OK
         );
     }
@@ -130,21 +130,19 @@ class EmpleadoController extends Controller
     {
 
         $empleado = Empleado::find($id);
+
         if ($empleado === null) {
             return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No existe un registro con este ID', null,  Response::HTTP_OK);
         }
         $validate = Validator($request->all(), UpdateEmpleadoRequest::rules($id), UpdateEmpleadoRequest::menssages());
         if ($validate->fails()) {
-
             return Utils::responseJson(
                 Response::HTTP_BAD_REQUEST,
                 'Invalid Data',
                 $validate->errors(),
-                Response::HTTP_BAD_REQUEST
+                Response::HTTP_OK
             );
         }
-
-        $empleado->fill($request->all());
 
         foreach ($empleado->attributesToArray() as $key => $value) {
             if (isset($request->$key)) {
@@ -154,13 +152,13 @@ class EmpleadoController extends Controller
             }
         }
 
-        if ($request->file('soporte_documento')->isValid()) {
+        if ($request->file('soporte_documento') && $request->file('soporte_documento')->isValid()) {
             $file = Storage::get($empleado->soporte_documento);
             if ($file) {
                 Storage::delete($empleado->soporte_documento);
-                $path = $request->file('soporte_documento')->store('empleados');
-                $empleado->soporte_documento = $path;
             }
+            $path = $request->file('soporte_documento')->store('empleados');
+            $empleado->soporte_documento = $path;
         }
 
         $empleado->save();

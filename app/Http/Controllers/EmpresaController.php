@@ -21,7 +21,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::with('documentos','term.parent','tipos')->paginate(6);
+        $empresas = Empresa::with('documentos','term.parent','tipos')->paginate(7);
 
         return Utils::responseJson(
             Response::HTTP_OK,

@@ -23,7 +23,7 @@ class InstitucionController extends Controller
     public function index()
     {
         //$instituciones = InstitucionResource::collection(Institucion::paginate(2));
-        $instituciones = Institucion::with('term.parent')->paginate(6);
+        $instituciones = Institucion::with('term.parent')->paginate(7);
         return Utils::responseJson(
             Response::HTTP_OK,
             $instituciones->count() === 0 ? 'No hay instituciones registradas' : 'Datos encontrados satisfactoriamente',

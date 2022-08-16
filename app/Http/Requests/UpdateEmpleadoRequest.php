@@ -37,7 +37,6 @@ class UpdateEmpleadoRequest extends FormRequest
             'ocupacion' => 'required',
             'nivel_escolaridad_id' => 'required',
             'direccion' => 'max:100',
-            'soporte_documento' => 'required'
         ];
     }
     public static function menssages()
@@ -53,7 +52,6 @@ class UpdateEmpleadoRequest extends FormRequest
             'ocupacion.required' => 'La ocupación del empleado es requerida',
             'nivel_escolaridad_id.required' => 'La escolaridad del empleado es requerida',
             'soporte_documento.required' => 'El documento del empleado es requerido'
-
         ];
     }
 }
