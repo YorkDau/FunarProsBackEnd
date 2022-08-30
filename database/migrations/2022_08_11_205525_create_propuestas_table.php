@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('propuestas', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['PAE', 'OBRAS'])->comment('Sector al que pertenece la institución (PAE-OBRAS)');
-            $table->string('nombre')->comment('nombre del contrato');
-            $table->string('estado')->comment('Estado de la propuesta');
+            $table->enum('tipo', ['PAE', 'OBRAS'])->comment('Tipo de contrato (PAE-OBRAS)');
+            $table->string('estado_id')->comment('Estado de la propuesta')->nullable();
+            $table->string('nombre')->comment('Nombre de la propuesta');
+            $table->string('empresa_contratista_id')->comment('Id de la empresa contratista');
+            $table->string('empresa_beneficiaria_id')->comment('Id de la la empresa beneficiaria');
             $table->string('numero_propuesta')->comment('Numero de radicado de la propuesta');
             $table->date('fecha_inicial')->comment('Fecha inicial de la creacion de la propuesta');
+
             $table->softDeletes();
             $table->timestamps();
         });

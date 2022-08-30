@@ -35,7 +35,7 @@ class Empresa extends Model
     }
         public function term()
     {
-        return $this->belongsTo(Term::class, 'municipio_id', 'id', 'municipio_id', 'id');
+        return $this->belongsTo(Term::class, 'municipio_id', 'id');
     }
     public function propuestas()
     {

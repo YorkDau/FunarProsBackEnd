@@ -12,15 +12,20 @@ class Propuesta extends Model
     use SoftDeletes;
     protected $fillable = [
         'id',
-        'institucion_id',
         'tipo',
-        'empresa_id',
         'numero_propuesta',
+        'empresa_contratista_id',
+        'empresa_beneficiaria_id',
         'fecha_inicial',
+        'estado_id',
         'deleted_at',
         'created_at',
         'updated_at'
     ];
+    public function estados()
+    {
+        return $this->belongsTo(Term::class, 'estado_id', 'id');
+    }
     public function empresas()
     {
         return $this->belongsToMany(Empresa::class, 'propuestas_empresas', 'propuesta_id', 'empresa_id');

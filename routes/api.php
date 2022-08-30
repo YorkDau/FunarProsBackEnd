@@ -40,6 +40,7 @@ Route::get('/term/niveles-estudios', [TermController::class, 'nivelEstudio']);
 Route::get('/term/generos', [TermController::class, 'genero']);
 Route::get('/term/tipos',[TermController::class,'tipoEmpresa']);
 Route::get('/term/tipos-documentos-empresas',[TermController::class,'documentoEmpresa']);
+Route::get('/term/estados',[TermController::class,'estados']);
 
 
 //Routes - Empleados

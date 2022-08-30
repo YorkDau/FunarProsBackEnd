@@ -25,10 +25,9 @@ class StorePropuestaRequest extends FormRequest
     {
         return [
             'numero_propuesta' => 'required|unique:propuestas',
-            'institucion_id' => 'required',
+            'empresa_contratista_id'=>'required',
+            'empresa_beneficiaria_id' =>'required',
             'tipo' => 'required',
-            'estado' => 'required',
-            'empresa_id' => 'required',
             'fecha_inicial' => 'required|date'
         ];
     }
@@ -36,10 +35,9 @@ class StorePropuestaRequest extends FormRequest
     {
         return [
             'numero_propuesta.required' => 'El numero de la propuesta  es requerida',
-            'numero_propuesta.required' => 'El número de la propuesta es requerida',
-            'institucion_id.required' => 'la Institucion es requerida',
-            'tipo_id.required' => 'El tipo de la propuesta  es requerido',
-            'empresa_id.required' => 'la  de empresa es requerida',
+            'empresa_beneficiaria_id.required' => 'La empresa beneficiaria es requerida',
+            'empresa_contratista_id.required' => 'La empresa contratista es requerida',
+            'tipo.required' => 'El tipo de la propuesta  es requerido',
             'fecha_inicial.required' => 'La fecha inicial de la propuesta es requerida'
         ];
     }

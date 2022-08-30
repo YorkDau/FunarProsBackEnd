@@ -9,6 +9,7 @@ use App\Http\Utils;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PropuestaController extends Controller
@@ -20,7 +21,14 @@ class PropuestaController extends Controller
      */
     public function index()
     {
-        //
+        $propuestas = Propuesta::with('estados')->paginate(7);
+
+        return Utils::responseJson(
+            Response::HTTP_OK,
+            $propuestas->count() === 0 ? 'No hay Propuestas registradas' : 'Datos encontrados satisfactoriamente',
+            $propuestas,
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -52,8 +60,9 @@ class PropuestaController extends Controller
         }
 
         try {
+            DB::beginTransaction();
             $propuesta = new Propuesta($request->all());
-
+            dd($propuesta);
 
         } catch (Exception $e) {
         }

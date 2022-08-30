@@ -65,16 +65,17 @@ class TermController extends Controller
                 Response::HTTP_OK
             );
         }
-              return Utils::responseJson(
+        return Utils::responseJson(
             Response::HTTP_OK,
             $tiposEstudios->count() === 0 ? 'No hay Niveles de estudios registrados' : 'Datos encontrados satisfactoriamente',
             $tiposEstudios,
             Response::HTTP_OK
         );
     }
-    public function genero(){
+    public function genero()
+    {
         $genero = Term::where('name', 'Generos')->first();
-        $tipoGeneros = Term::where('term_id',$genero->id)->get();
+        $tipoGeneros = Term::where('term_id', $genero->id)->get();
         if ($tipoGeneros === null) {
             return Utils::responseJson(
                 Response::HTTP_NOT_FOUND,
@@ -83,7 +84,7 @@ class TermController extends Controller
                 Response::HTTP_OK
             );
         }
-              return Utils::responseJson(
+        return Utils::responseJson(
             Response::HTTP_OK,
             $tipoGeneros->count() === 0 ? 'No hay tipos de generos registrados' : 'Datos encontrados satisfactoriamente',
             $tipoGeneros,
@@ -91,7 +92,7 @@ class TermController extends Controller
         );
     }
 
-        public  function tipoEmpresa()
+    public  function tipoEmpresa()
     {
         $empresas = Term::where('name', 'Tipo sociedad')->first();
         $tiposEmpresas = Term::where('term_id', $empresas->id)->get();
@@ -105,7 +106,7 @@ class TermController extends Controller
             Response::HTTP_OK
         );
     }
-            public  function documentoEmpresa()
+    public  function documentoEmpresa()
     {
         $doucmentos = Term::where('name', 'Documentos empresa')->first();
         $tiposdocumentos = Term::where('term_id', $doucmentos->id)->get();
@@ -116,6 +117,25 @@ class TermController extends Controller
             Response::HTTP_OK,
             $tiposdocumentos->count() === 0 ? 'No hay tipos de empresas registradas' : 'Datos encontrados satisfactoriamente',
             $tiposdocumentos,
+            Response::HTTP_OK
+        );
+    }
+    public function estados()
+    {
+        $estado = Term::where('name', 'Estados')->first();
+        $tipoEstados = Term::where('term_id', $estado->id)->get();
+        if ($tipoEstados === null) {
+            return Utils::responseJson(
+                Response::HTTP_NOT_FOUND,
+                'No se encuentran estados registrados',
+                null,
+                Response::HTTP_OK
+            );
+        }
+        return Utils::responseJson(
+            Response::HTTP_OK,
+            $tipoEstados->count() === 0 ? 'No hay tipos estados registrados' : 'Datos encontrados satisfactoriamente',
+            $tipoEstados,
             Response::HTTP_OK
         );
     }
