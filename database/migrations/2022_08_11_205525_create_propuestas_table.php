@@ -26,7 +26,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        Schema::create('propuestas_empresas', function (Blueprint $table) {
+        /*Schema::create('propuestas_empresas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('propuesta_id')->comment('Llave foranea (relación) de la tabla propuestas.');
             $table->foreign('propuesta_id')->references('id')->on('propuestas');
@@ -35,6 +35,8 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+        */
+
         Schema::create('propuestas_institucions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('propuesta_id')->comment('Llave foranea (relación) de la tabla propuestas.');

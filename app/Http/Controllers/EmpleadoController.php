@@ -183,7 +183,11 @@ class EmpleadoController extends Controller
         if ($empleado === null) {
             return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No existe un registro con este ID', null,  Response::HTTP_OK);
         }
-        $empleado->delete();
+        $file = Storage::get($empleado->soporte_documento);
+        if ($file) {
+            Storage::delete($empleado->soporte_documento);
+        }
+       $empleado->delete();
         return Utils::responseJson(Response::HTTP_OK, 'Eliminado corectamente', $empleado,  Response::HTTP_OK);
     }
 }

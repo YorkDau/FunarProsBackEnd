@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\InstitucionTipoContrato;
+use App\Rules\InstitucionTipoContratoRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePropuestaRequest extends FormRequest
@@ -21,13 +23,16 @@ class StorePropuestaRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public static  function rules()
+    public static  function rules($request)
     {
         return [
             'numero_propuesta' => 'required|unique:propuestas',
-            'empresa_contratista_id'=>'required',
-            'empresa_beneficiaria_id' =>'required',
+            'empresa_contratista_id' => 'required',
+            'empresa_beneficiaria_id' => 'required',
             'tipo' => 'required',
+            'estado_id',
+            'institucion_id' => [new InstitucionTipoContratoRule($request->tipo)],
+            'nombre' => 'required',
             'fecha_inicial' => 'required|date'
         ];
     }
@@ -38,6 +43,7 @@ class StorePropuestaRequest extends FormRequest
             'empresa_beneficiaria_id.required' => 'La empresa beneficiaria es requerida',
             'empresa_contratista_id.required' => 'La empresa contratista es requerida',
             'tipo.required' => 'El tipo de la propuesta  es requerido',
+            'nombre.required' => 'El nombre del contrato es requerido',
             'fecha_inicial.required' => 'La fecha inicial de la propuesta es requerida'
         ];
     }

@@ -16,8 +16,10 @@ class Propuesta extends Model
         'numero_propuesta',
         'empresa_contratista_id',
         'empresa_beneficiaria_id',
+        'nombre',
         'fecha_inicial',
         'estado_id',
+        'institucion_id',
         'deleted_at',
         'created_at',
         'updated_at'
@@ -25,6 +27,10 @@ class Propuesta extends Model
     public function estados()
     {
         return $this->belongsTo(Term::class, 'estado_id', 'id');
+    }
+        public function empresaBeneficiaria()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_beneficiaria_id', 'id');
     }
     public function empresas()
     {
