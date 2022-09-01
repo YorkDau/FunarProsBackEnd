@@ -63,7 +63,6 @@ class PropuestaController extends Controller
             DB::beginTransaction();
             $propuesta = new Propuesta($request->all());
             dd($propuesta);
-
         } catch (Exception $e) {
         }
     }

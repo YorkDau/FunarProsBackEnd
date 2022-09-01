@@ -13,10 +13,14 @@ class TermController extends Controller
     public function departamentos()
     {
         $pais = Term::where('name', 'Colombia')->first();
+
+        if ($pais == null)
+            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentra el país registrado.', null,  Response::HTTP_OK);
+
         $departamentos = Term::where('term_id', $pais->id)->get();
-        if ($departamentos === null) {
-            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran departamentos registrados', null,  Response::HTTP_OK);
-        }
+        if ($departamentos === null)
+            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran departamentos registrados.', null,  Response::HTTP_OK);
+
         return Utils::responseJson(
             Response::HTTP_OK,
             $departamentos->count() === 0 ? 'No hay departamentos registrados' : 'Datos encontrados satisfactoriamente',
@@ -25,11 +29,12 @@ class TermController extends Controller
         );
     }
     public function municipios($id)
+
     {
-        $municipios = Term::where('term_id', $id)->get();
+        $municipios = Term::where('term_id',  $id)->get();
 
         if ($municipios === null) {
-            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran municipios registrados', null,  Response::HTTP_OK);
+            return Utils::responseJson(Response::HTTP_NOT_FOUND,  'No se encuentran municipios registrados', null,  Response::HTTP_OK);
         }
         return Utils::responseJson(
             Response::HTTP_OK,

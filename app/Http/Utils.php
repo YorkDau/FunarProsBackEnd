@@ -2,7 +2,8 @@
 
 namespace App\Http;
 
-class Utils {
+class Utils
+{
 
     public static function responseJson(int $status, string $message, $data, int $statusHttp)
     {
