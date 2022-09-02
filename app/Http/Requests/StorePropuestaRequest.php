@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\InstitucionTipoContrato;
+use App\Rules\InstitucionTipoContratoRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePropuestaRequest extends FormRequest
@@ -21,7 +23,7 @@ class StorePropuestaRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public static  function rules()
+    public static  function rules($request)
     {
         return [
             'numero_propuesta' => 'required|unique:propuestas',
@@ -29,7 +31,7 @@ class StorePropuestaRequest extends FormRequest
             'empresa_beneficiaria_id' => 'required',
             'tipo' => 'required',
             'estado_id',
-            'institucion_id',
+            'institucion_id' => [new InstitucionTipoContratoRule($request->tipo)],
             'nombre' => 'required',
             'fecha_inicial' => 'required|date'
         ];

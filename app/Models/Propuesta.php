@@ -28,6 +28,10 @@ class Propuesta extends Model
     {
         return $this->belongsTo(Term::class, 'estado_id', 'id');
     }
+        public function empresaBeneficiaria()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_beneficiaria_id', 'id');
+    }
     public function empresas()
     {
         return $this->belongsToMany(Empresa::class, 'propuestas_empresas', 'propuesta_id', 'empresa_id');
