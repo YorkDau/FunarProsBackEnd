@@ -49,11 +49,17 @@ class PropuestaController extends Controller
      */
     public function store(Request $request)
     {
+
+        if($request->tipo === 'PAE'){
+            $validateInstitucion = Validator::make($request->institucion_id, StorePropuestaRequest::institucionRules(),StorePropuestaRequest::messageInstitucion());
+            dd($validateInstitucion);
+
+        }
         $validate = Validator::make($request->all(), StorePropuestaRequest::rules(), StorePropuestaRequest::menssages());
-        if ($validate->fails()) {
+        if ($validate->fails() ) {
             return Utils::responseJson(
                 Response::HTTP_BAD_REQUEST,
-                'No se pudó guardar la empresa, intente nuevamente',
+                'No se pudó guardar la propuesta, intente nuevamente',
                 $validate->errors(),
                 Response::HTTP_BAD_REQUEST
             );
@@ -63,6 +69,7 @@ class PropuestaController extends Controller
             DB::beginTransaction();
             $propuesta = new Propuesta($request->all());
             dd($propuesta);
+
 
         } catch (Exception $e) {
         }

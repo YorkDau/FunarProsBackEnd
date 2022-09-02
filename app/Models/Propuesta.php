@@ -16,8 +16,10 @@ class Propuesta extends Model
         'numero_propuesta',
         'empresa_contratista_id',
         'empresa_beneficiaria_id',
+        'nombre',
         'fecha_inicial',
         'estado_id',
+        'institucion_id',
         'deleted_at',
         'created_at',
         'updated_at'
