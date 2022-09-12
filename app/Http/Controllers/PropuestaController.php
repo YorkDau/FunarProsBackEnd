@@ -41,8 +41,6 @@ class PropuestaController extends Controller
             );
         }
 
-
-
         try {
             DB::beginTransaction();
             $propuesta = new Propuesta($request->all());
@@ -51,12 +49,13 @@ class PropuestaController extends Controller
                 $propuesta->$key = strtoupper($value);
             }
             $propuesta->fecha_inicial = date('Y-m-d', strtotime($propuesta->fecha_inicial));
-            $propuesta->save();
-            //dd($propuesta);
-
-
             $instituciones = [];
 
+            foreach ($request->instituciones as $value) {
+                $instituciones[] = $value['value'];
+            }
+            $propuesta->save();
+            $propuesta->instituciones()->sync($instituciones);
 
             Db::commit();
             return Utils::responseJson(
@@ -88,8 +87,10 @@ class PropuestaController extends Controller
     {
         //
     }
-    public function destroy(Propuesta $propuesta)
+    public function destroy($id)
     {
-        //
+        $empresa = Propuesta::find($id);
+        $empresa->delete();
+        return Utils::responseJson(Response::HTTP_OK, 'Eliminado corectamente', $empresa,  Response::HTTP_OK);
     }
 }

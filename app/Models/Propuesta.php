@@ -28,7 +28,7 @@ class Propuesta extends Model
     {
         return $this->belongsTo(Term::class, 'estado_id', 'id');
     }
-        public function empresaBeneficiaria()
+    public function empresaBeneficiaria()
     {
         return $this->belongsTo(Empresa::class, 'empresa_beneficiaria_id', 'id');
     }
@@ -38,6 +38,6 @@ class Propuesta extends Model
     }
     public function instituciones()
     {
-        return $this->belongsToMany(Institucion::class, 'propuestas_instituciones', 'propuesta_id', 'institucion_id');
+        return $this->belongsToMany(Institucion::class, 'propuestas_institucions', 'propuesta_id', 'institucion_id');
     }
 }

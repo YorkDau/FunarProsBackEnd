@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('propuestas', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['PAE', 'OBRAS'])->comment('Tipo de contrato (PAE-OBRAS)');
+            $table->enum('tipo', ['CONTRATO PAE', 'CONTRATO OBRAS'])->comment('Tipo de contrato (PAE-OBRAS)');
             $table->string('estado_id')->comment('Estado de la propuesta')->nullable();
             $table->string('nombre')->comment('Nombre de la propuesta');
             $table->string('empresa_contratista_id')->comment('Id de la empresa contratista');

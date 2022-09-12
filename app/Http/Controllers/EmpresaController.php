@@ -82,9 +82,15 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
+    public function show($id)
     {
-        //
+        $empresa = Empresa::with('term.parent','tipos')->find($id);
+        return Utils::responseJson(
+            Response::HTTP_OK,
+            $empresa === null ? 'No hay empresas registrados' : 'Datos encontrados satisfactoriamente',
+            $empresa !== null ? $empresa->toArray() : $empresa,
+            Response::HTTP_OK
+        );
     }
 
     /**

@@ -15,10 +15,10 @@ class InstitucionTipoContratoRule implements Rule
 
     public function passes($attribute, $value)
     {
-          if($this->tipo == 'PAE') {
+        if ($this->tipo == 'CONTRATO PAE') {
             return isset($value);
-          }
-          return true;
+        }
+        return true;
     }
 
     public function message()
