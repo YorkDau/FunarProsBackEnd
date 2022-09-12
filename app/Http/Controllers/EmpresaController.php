@@ -14,14 +14,10 @@ use Illuminate\Support\Facades\Validator;
 
 class EmpresaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $empresas = Empresa::with('documentos','term.parent','tipos')->paginate(7);
+        $empresas = Empresa::with('documentos', 'term.parent', 'tipos')->paginate(7);
 
         return Utils::responseJson(
             Response::HTTP_OK,
@@ -31,22 +27,6 @@ class EmpresaController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreEmpresaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), StoreEmpresaRequest::rules(), StoreEmpresaRequest::menssages());
@@ -70,15 +50,14 @@ class EmpresaController extends Controller
 
             $empresa->save();
             $documentos = [];
-
-            if ($request->file('soportes.file') && $request->file("soportes.document")->isValid()) {
-                foreach ($request->soportes as $key) {
-                    $path = $request->file("soportes.file")->store('empresas/documentos');
-                    $documentos[$key['document']['value']] = ['soporte_documento' => $path];
+            foreach ($request->soportes as $key => $value) {
+                if ($request->file("soportes.$key.file")) {
+                    $path = $request->file("soportes.$key.file")->store('empresas/documentos');
+                    $documentos[$value['document']['value']] = ['soporte_documento' => $path];
                 }
             }
-            $empresa->documentos()->syncWithPivotValues(array_keys($documentos), array_values($documentos));
 
+            $empresa->documentos()->sync($documentos);
             Db::commit();
             return Utils::responseJson(
                 Response::HTTP_OK,

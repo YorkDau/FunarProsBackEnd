@@ -46,6 +46,8 @@ class TermController extends Controller
     public  function tipoDocumentos()
     {
         $documentos = Term::where('name', 'Tipos de documento')->first();
+        if ($documentos === null)
+            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran tipos de documentos  registrados', null,  Response::HTTP_OK);
         $tiposDocumentos = Term::where('term_id', $documentos->id)->get();
         if ($tiposDocumentos === null) {
             return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran tipos de documentos  registrados', null,  Response::HTTP_OK);
@@ -114,6 +116,10 @@ class TermController extends Controller
     public  function documentoEmpresa()
     {
         $doucmentos = Term::where('name', 'Documentos empresa')->first();
+
+        if ($doucmentos === null)
+            return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran  tipos de empresas registrados', null,  Response::HTTP_OK);
+
         $tiposdocumentos = Term::where('term_id', $doucmentos->id)->get();
         if ($tiposdocumentos === null) {
             return Utils::responseJson(Response::HTTP_NOT_FOUND, 'No se encuentran  tipos de empresas registrados', null,  Response::HTTP_OK);

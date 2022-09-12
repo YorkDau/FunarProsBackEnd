@@ -6,21 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEmpresaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public static function rules()
     {
         return [
@@ -34,9 +25,6 @@ class StoreEmpresaRequest extends FormRequest
         ];
     }
 
-    /**
-     *
-     */
     public static function menssages()
     {
         return [
