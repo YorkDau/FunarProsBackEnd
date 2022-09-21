@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('institucions', function (Blueprint $table) {
             $table->id();
-            $table->string('identificacion',20)->comment('Numero de identificaión de la institución');
-            $table->integer('telefono')->default(12)->comment('Numero de contacto de la institución');
+            $table->string('identificacion', 20)->comment('Numero de identificaión de la institución');
+            $table->string('telefono')->comment('Numero de contacto de la institución');
             $table->date('inicio_convenio')->comment('Fecha de incio del convenio');
             $table->string('nombre', 100)->comment('Nombre de la institución');
             $table->foreignId('term_id')->comment('Llave foranea (relacion) de la tabla terms.');

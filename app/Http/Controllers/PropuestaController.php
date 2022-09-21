@@ -75,9 +75,15 @@ class PropuestaController extends Controller
         }
     }
 
-    public function show(Propuesta $propuesta)
+    public function show($id)
     {
-        //
+        $propuesta = Propuesta::with('empresaBeneficiaria', 'estados')->find($id);
+        return Utils::responseJson(
+            Response::HTTP_OK,
+            $propuesta === null ? 'No hay empresas registrados' : 'Datos encontrados satisfactoriamente',
+            $propuesta !== null ? $propuesta->toArray() : $propuesta,
+            Response::HTTP_OK
+        );
     }
     public function edit(Propuesta $propuesta)
     {
@@ -89,8 +95,8 @@ class PropuestaController extends Controller
     }
     public function destroy($id)
     {
-        $empresa = Propuesta::find($id);
-        $empresa->delete();
-        return Utils::responseJson(Response::HTTP_OK, 'Eliminado corectamente', $empresa,  Response::HTTP_OK);
+        $propuesta = Propuesta::find($id);
+        $propuesta->delete();
+        return Utils::responseJson(Response::HTTP_OK, 'Eliminado corectamente', $propuesta,  Response::HTTP_OK);
     }
 }

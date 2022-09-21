@@ -26,11 +26,11 @@ class Propuesta extends Model
     ];
     public function estados()
     {
-        return $this->belongsTo(Term::class, 'estado_id', 'id');
+        return $this->belongsTo(Term::class, 'estado_id', 'id')->withTrashed();
     }
     public function empresaBeneficiaria()
     {
-        return $this->belongsTo(Empresa::class, 'empresa_beneficiaria_id', 'id');
+        return $this->belongsTo(Empresa::class, 'empresa_beneficiaria_id', 'id')->withTrashed();
     }
     public function empresas()
     {

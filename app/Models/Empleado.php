@@ -35,11 +35,11 @@ class Empleado extends Model
     {
         return $this->belongsTo(Term::class, 'genero_id', 'id');
     }
-        public function documento()
+    public function documento()
     {
         return $this->belongsTo(Term::class, 'tipo_identificacion_id', 'id');
     }
-        public function escolaridad()
+    public function escolaridad()
     {
         return $this->belongsTo(Term::class, 'nivel_escolaridad_id', 'id');
     }

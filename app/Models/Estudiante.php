@@ -28,7 +28,8 @@ class Estudiante extends Model
         'created_at',
         'updated_at'
     ];
-    public function institucion(){
+    public function institucion()
+    {
         return $this->belongsTo(Institucion::class);
     }
 }

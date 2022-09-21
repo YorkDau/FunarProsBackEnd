@@ -33,7 +33,7 @@ class Empresa extends Model
     {
         return $this->belongsTo(Term::class, 'tipo_id', 'id');
     }
-        public function term()
+    public function term()
     {
         return $this->belongsTo(Term::class, 'municipio_id', 'id');
     }

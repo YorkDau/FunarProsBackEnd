@@ -21,13 +21,12 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->foreignId('term_id')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->timestamp('deleted_at', 6)->nullable(); // Destroyed Timestamp
+            $table->softDeletes();
             $table->timestamps();
-
         });
         Schema::table('terms', function (Blueprint $table) {
             $table->foreign('term_id')->references('id')->on('terms');
-            $table->unique(array('term_id','name'));
+            $table->unique(array('term_id', 'name'));
         });
     }
 

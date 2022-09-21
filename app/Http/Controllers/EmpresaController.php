@@ -84,7 +84,7 @@ class EmpresaController extends Controller
      */
     public function show($id)
     {
-        $empresa = Empresa::with('term.parent','tipos')->find($id);
+        $empresa = Empresa::with('term.parent', 'tipos')->find($id);
         return Utils::responseJson(
             Response::HTTP_OK,
             $empresa === null ? 'No hay empresas registrados' : 'Datos encontrados satisfactoriamente',

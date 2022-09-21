@@ -187,7 +187,7 @@ class EmpleadoController extends Controller
         if ($file) {
             Storage::delete($empleado->soporte_documento);
         }
-       $empleado->delete();
+        $empleado->delete();
         return Utils::responseJson(Response::HTTP_OK, 'Eliminado corectamente', $empleado,  Response::HTTP_OK);
     }
 }
